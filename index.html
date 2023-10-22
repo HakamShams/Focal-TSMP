@@ -1,0 +1,460 @@
+<!DOCTYPE HTML>
+<!--
+	Strongly Typed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Nerfi CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+
+	Modified by: Mohamad Hakam Shams Eddin CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+
+-->
+<html>
+	<head>
+		<title>No Sidebar - Strongly Typed by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/academicons.min.css" />
+		<link rel="stylesheet" href="assets/css/bulma-carousel.min.css">
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<section id="header" >
+					<div class="container">
+
+						<!-- Logo -->
+							<h1 id="logo"><a href="">Focal-TSMP: Deep learning for vegetation health prediction and agricultural drought assessment from a regional climate simulation</a></h1>
+							<p>
+						 	 	<a href="https://hakamshams.github.io/">Mohamad Hakam Shams Eddin</a><sup>1</sup>,
+						  		<a href="http://pages.iai.uni-bonn.de/gall_juergen/">Juergen Gall</a><sup>1,2</sup>
+								<br>
+								<br>
+								<sup>1</sup>Institute of Computer Science, University of Bonn, Germany
+								<br>
+            					<sup>2</sup>Lamarr Institute for Machine Learning and Artificial Intelligence, Germany
+							</p>
+
+						<!-- Nav -->
+							<nav id="nav">
+								<ul>
+									<li><a class="icon1 ai ai-open-access" href=""><span>Paper</span></a></li>
+									<!--<li><a class="icon1 ai ai-arxiv" href=""><span>ArXiv</span></a></li>-->
+									<li><a class="icon brands alt fa-youtube" href="https://youtu.be/eF-6MysFU9o"><span>Video</span></a></li>
+									<li><a class="icon brands alt fa-github" href="https://github.com/HakamShams/Focal_TSMP"><span>Code</span></a></li>
+									<li><a class="icon1 ai ai-open-data" href="https://zenodo.org/doi/10.5281/zenodo.10008814"><span>Dataset</span></a></li>
+								</ul>
+							</nav>
+
+					</div>
+				</section>
+
+
+		<!-- video -->
+		<section >
+			<div class="container" >
+			  <!-- Paper video. -->
+				  <div class="video main" >
+					<!-- Youtube embed code here -->
+					<iframe src="https://www.youtube.com/embed/eF-6MysFU9o" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				  </div>
+				</div>
+		</section>
+		<!-- video -->
+
+			<!-- Abstract -->
+				<section id="main">
+					<div class="container">
+						<div id="abstract content">
+
+							<!-- Post -->
+								<article class="box post">
+									<header>
+										<h2>Abstract</h2>
+										<p align="justify" style="color:black"> In this study, we investigate applying deep learning
+											(DL) models on a regional climate simulation produced by Terrestrial Systems
+											Modelling Platform (TSMP Ground to Atmosphere G2A) for vegetation health modeling
+											and agricultural drought assessment. The TSMP simulation is performed in a free mode
+											and the DL model is used in an intermediate step to synthesize Normalized Difference
+											Vegetation Index (NDVI) and Brightness Temperature (BT) images from the
+											input TSMP simulation over Europe. These predicted images were then used
+											to derive different vegetation and drought indices like NDVI anomaly (NDVI<sub>a</sub>), BT
+											anomaly (BT<sub>a</sub>), Vegetation Condition Index (VCI), Thermal Condition Index (TCI),
+											and Vegetation Health Index (VHI). To ensure reliability and to assess the model applicability
+											with different seasonality and spatial variability, we provide an analysis of model biases and
+											uncertainties across different regions over the Pan-Europe domain. We further provide an
+											analysis about the contribution of the input variables from the TSMP model components to
+											ensure a better understanding of the model prediction.
+											A comprehensive evaluation on the long-term TSMP using reference remote sensing
+											data showed sufficiently good agreements between the model predictions and observations.
+											While model performance varied on the test set between different climate regions,
+											it achieves a mean absolute error (MAE) of 0.027 and 1.90 K&#176; with coefficient of
+											determination (R<sup>2</sup>) scores of 0.88 and 0.92 for NDVI and BT, respectively,
+											at 0.11&#176; resolution for sub-seasonal predictions. Our study could be used as a complimentary evaluation
+											framework for climate change simulations with TSMP. Moreover, the developed DL model
+											could be integrated with data assimilation or used for down-stream tasks, i.e., modelling
+											the impact of extreme events on vegetation responses with different climate change scenarios.
+											In summery, we demonstrated the feasibility of using DL on a TSMP simulation to synthesize
+											NDVI and BT, which can be used for agricultural drought forecasting.</p>
+									</header>
+								</article>
+						</div>
+					</div>
+
+				</section>
+
+<!-- Model Architecture -->
+
+				<section style="background: #FFFFFF; padding: 0em 0 2em 0">
+					<div class="container">
+						<div class="row aln-center">
+							<!-- Content -->
+								<div class="col-11">
+									<!-- Post -->
+										<article class="box post">
+											<header>
+												<h2>Model Architecture</h2>
+											</header>
+											<a href="assets/images/model_01.jpg" class="image featured"><img src="assets/images/model_01.jpg" alt="model design" /></a>
+											<p> The model design follows a U-Net architecture with focal modulation blocks.
+												The input for deep learning is a data cube representing a specific week of TSMP data and
+												the output are NDVI and BT corresponding to the same week.
+												The predicted NDVI and BT are used to derive different agricultural drought indices.</p>
+
+											<a href="assets/images/model_02.jpg" class="image featured"><img src="assets/images/model_02.jpg" alt="focal modulation block" /></a>
+
+											<p> An illustration of the function Focal Modulation Block.
+												It consists of 3 main parts: focal contextualization, gated aggregation, and interaction.
+												First, the query, value and gates are obtained by projecting X<sup>k</sup> with linear layers.
+												Then, a stack of depth-wise 2D convolutions followed by a global pooling is used on the value to
+												derive contextual features around pixels. Gates G<sup>k</sup> are used to adaptive aggregate features into a modulator.
+												Finally, the interaction between queried pixels are modulator is performed and projected by a final linear
+												layer to compute the output. The shown is examples gates with the magnitude of modulator pixel-wise for the first block encoder.</p>
+
+										</article>
+								</div>
+						</div>
+					</div>
+				</section>
+
+<!-- Prediction over PRUDENCE Regions -->
+
+				<section style="background: #000000; padding: 2em 0 4em 0">
+					<div class="container">
+						<header><h2 style="color:#FFFFFF; text-align: center">Results </h2></header>
+
+						<div class="row aln-center">
+							<!-- Content -->
+								<div class="col-12">
+									<!-- Post -->
+									 <div class="carousel results-carousel">
+												<div class="item">
+													<img class="image fit" src="assets/images/curve_NDVI_a_1.png" alt="NDVI anomaly prediction"/>
+														<h3 class="header" style="color: white; text-align: center">
+															Prediction of weekly spatially averaged <span style="color:#00FFFF">NDVI anomaly</span> over the PRUDENCE regions.
+														</h3>
+												</div>
+												<div class="item">
+													<img class="image fit" src="assets/images/curve_NDVI_a_2.png" alt="NDVI anomaly prediction"/>
+														<h3 class="header" style="color: white; text-align: center">
+															Prediction of weekly spatially averaged <span style="color:#00FFFF">NDVI anomaly</span> over the PRUDENCE regions.
+														</h3>
+												</div>
+												<div class="item">
+													<img class="image fit" src="assets/images/curve_BT_a_1.png" alt="BT anomaly prediction"/>
+														<h3 class="header" style="color: white; text-align: center">
+															Prediction of weekly spatially averaged <span style="color:#DAA520">BT anomaly</span> over the PRUDENCE regions.
+														</h3>
+												</div>
+												<div class="item">
+													<img class="image fit" src="assets/images/curve_BT_a_2.png" alt="BT anomaly prediction"/>
+														<h3 class="header" style="color: white; text-align: center">
+															Prediction of weekly spatially averaged <span style="color:#DAA520">BT anomaly</span> over the PRUDENCE regions.
+														</h3>
+												</div>
+										 		<div class="item">
+										 			<img class="image fit" src="assets/images/curve_VCI_1.png" alt="VCI prediction"/>
+														<h3 class="header" style="color: white; text-align: center">
+															Prediction of weekly spatially averaged <span style="color:#32CD32">VCI</span> over the PRUDENCE regions.
+														</h3>
+											  	</div>
+												 <div class="item">
+															<img class="image fit" src="assets/images/curve_VCI_2.png" alt="VCI prediction"/>
+																<h3 class="header" style="color: white; text-align: center">
+															Prediction of weekly spatially averaged <span style="color:#32CD32">VCI</span> over the PRUDENCE regions.
+																</h3>
+														</div>
+												 <div class="item">
+															<img class="image fit" src="assets/images/curve_TCI_1.png" alt="TCI prediction"/>
+																<h3 class="header" style="color: white; text-align: center">
+															Prediction of weekly spatially averaged <span style="color:#f5deb3">TCI</span> over the PRUDENCE regions.
+																</h3>
+														</div>
+												 <div class="item">
+															<img class="image fit" src="assets/images/curve_TCI_2.png" alt="TCI prediction"/>
+																<h3 class="header" style="color: white; text-align: center">
+															Prediction of weekly spatially averaged <span style="color:#f5deb3">TCI</span> over the PRUDENCE regions.
+																</h3>
+														</div>
+												 <div class="item">
+															<img class="image fit" src="assets/images/curve_VHI_1.png" alt="VHI prediction"/>
+																<h3 class="header" style="color: white; text-align: center">
+															Prediction of weekly spatially averaged <span style="color:#87CEEB">VHI</span> over the PRUDENCE regions.
+																</h3>
+														</div>
+												 <div class="item">
+															<img class="image fit" src="assets/images/curve_VHI_2.png" alt="VHI prediction"/>
+																<h3 class="header" style="color: white; text-align: center">
+															Prediction of weekly spatially averaged <span style="color:#87CEEB">VHI</span> over the PRUDENCE regions.
+																</h3>
+														</div>
+									 </div>
+								</div>
+						</div>
+					</div>
+				</section>
+
+<!-- Uncertainty Analysis I -->
+			<section style="background: #FFFFFF; padding: 0em 0 4em 0">
+					<div class="container">
+						<div class="row aln-center" >
+							<!-- Content -->
+								<div class="col-11">
+									<!-- Post -->
+										<article class="box post">
+											<a href="assets/images/uncertainty_1.jpg" class="image fit"><img src="assets/images/uncertainty_1.jpg" alt="uncertainty analysis 1"  /></a>
+											<p>An analysis of uncertainty and model generalization for different times of the year.
+												(a) NDVI mean bias. (b) NDVI mean Pearson Correlation.
+												(c) BT mean bias. (d) BT mean Pearson Correlation.</p>
+										</article>
+								</div>
+						</div>
+					</div>
+				</section>
+
+<!-- Uncertainty Analysis II -->
+
+			<section style="background: #000000; padding: 0em 0 4em 0">
+					<div class="container">
+						<div class="row aln-center" >
+							<!-- Content -->
+								<div class="col-11">
+									<!-- Post -->
+										<article class="box post">
+											<a href="assets/images/uncertainty_2.png" class="image fit"><img src="assets/images/uncertainty_2.png" alt="uncertainty analysis 2"  /></a>
+											<p style="color: #FFFFFF">An analysis of uncertainty and model generalization for
+												different time of the year over each PRUDENCE region. (a) NDVI bias distribution.
+												(b) BT bias distribution. Shown are the probability density functions.
+												(c) NDVI mean absolute error. (d) BT mean absolute error.</p>
+										</article>
+								</div>
+						</div>
+					</div>
+				</section>
+
+<!-- VHI seasonal and frequency prediction -->
+
+			<section style="background: #FFFFFF; padding: 0em 0 4em 0">
+					<div class="container">
+						<div class="row aln-center" >
+							<!-- Content -->
+								<div class="col-11">
+									<!-- Post -->
+										<article class="box post">
+
+											<header>
+												<h2>Agricultural Drought Assessment</h2>
+											</header>
+											<a href="assets/images/VHI_seasonal.jpg" class="image fit"><img src="assets/images/VHI_seasonal.jpg" alt="VHI seasonal prediction"  /></a>
+											<p>Comparison between the seasonal predicted Vegetation Health Index (VHI) and NOAA observations over Pan-Europe domain at 0.11&#176 resolution.</p>
+											<a href="assets/images/VHI_frequency.jpg" class="image fit"><img src="assets/images/VHI_frequency.jpg" alt=""  /></a>
+											<p>Comparison between the predicted drought frequency and NOAA observations over Pan-Europe domain at 0.11&#176 resolution.
+												Frequency represents the percent of weeks with Severe-to-Exceptional drought events (VHI < 26).</p>
+										</article>
+								</div>
+						</div>
+					</div>
+				</section>
+
+<!-- Channel Attention -->
+				<section id="model" style="background: #F5F5F5; padding: 0em 0 2em 0">
+					<div class="container">
+						<div class="row aln-center">
+							<!-- Content -->
+								<div  class="col-11">
+									<!-- Post -->
+										<article class="box post">
+											<header>
+												<h2>Global impacts of input variables</h2>
+											</header>
+											<a href="assets/images/channel_attention.jpg" class="image featured"><img src="assets/images/channel_attention.jpg" alt="channel attention" /></a>
+											<p>Channel attentions for TSMP input variables.
+												The activations are shown for both NDVI (top) and BT (bottom) with respect
+												to all weeks in validation and test sets.
+												Each set of attentions is grouped according to one model component in TSMP.</p>
+										</article>
+								</div>
+						</div>
+					</div>
+				</section>
+
+<!-- Vegetation Trends -->
+
+			<section style="background: #000000; padding: 2em 0 2em 0">
+					<div class="container">
+						<header><h2 style="color:#FFFFFF; text-align: center">Long-term VHI over Europe</h2></header>
+
+						<div class="row aln-center">
+							<!-- Content -->
+								<div id="content" class="col-12">
+									<!-- Post -->
+									 <div id="results-carousel" class="carousel results-carousel">
+												<div class="item">
+													<img class="image fit" src="assets/images/curve_VHI_BI.png" alt="VHI over BI"/>
+														<h3 class="header" style="color: white; text-align: center">
+															Weekly spatially averaged <span style="color:#00FFFF">VHI</span> over the British Isles.
+														</h3>
+												</div>
+												<div class="item">
+													<img class="image fit" src="assets/images/curve_VHI_IP.png" alt="VHI over IP"/>
+														<h3 class="header" style="color: white; text-align: center">
+															Weekly spatially averaged <span style="color:#00FFFF">VHI</span> over the Iberian Peninsula.
+														</h3>
+												</div>
+										 		<div class="item">
+													<img class="image fit" src="assets/images/curve_VHI_FR.png" alt="VHI over FR"/>
+														<h3 class="header" style="color: white; text-align: center">
+															Weekly spatially averaged <span style="color:#00FFFF">VHI</span> over France.
+														</h3>
+												</div>
+
+												<div class="item">
+													<img class="image fit" src="assets/images/curve_VHI_ME.png" alt="VHI over ME"/>
+														<h3 class="header" style="color: white; text-align: center">
+															Weekly spatially averaged <span style="color:#00FFFF">VHI</span> over Mid-Europe.
+														</h3>
+												</div>
+												<div class="item">
+													<img class="image fit" src="assets/images/curve_VHI_SC.png" alt="VHI over SC"/>
+														<h3 class="header" style="color: white; text-align: center">
+															Weekly spatially averaged <span style="color:#00FFFF">VHI</span> over Scandinavia.
+														</h3>
+												</div>
+										 		<div class="item">
+										 			<img class="image fit" src="assets/images/curve_VHI_AL.png" alt="VHI over AL"/>
+														<h3 class="header" style="color: white; text-align: center">
+															Weekly spatially averaged <span style="color:#00FFFF">VHI</span> over the Alps.
+														</h3>
+											  	</div>
+										 		<div class="item">
+													<img class="image fit" src="assets/images/curve_VHI_MD.png" alt="VHI over MD"/>
+														<h3 class="header" style="color: white; text-align: center">
+															Weekly spatially averaged <span style="color:#00FFFF">VHI</span> over Mediterranean.
+														</h3>
+												</div>
+												<div class="item">
+													<img class="image fit" src="assets/images/curve_VHI_EA.png" alt="VHI over EA"/>
+														<h3 class="header" style="color: white; text-align: center">
+															Weekly spatially averaged <span style="color:#00FFFF">VHI</span> over Eastern Europe.
+														</h3>
+												</div>
+									 </div>
+								</div>
+						</div>
+					</div>
+				</section>
+
+<!-- Poster -->
+			<section style="background: white; padding: 2em 0 2em 0">
+					<div class="container">
+						<div class="row">
+							<!-- Content -->
+								<div  class="col-12">
+									<!-- Post -->
+										<article class="box post">
+											<header>
+												<h2 align="left">Poster</h2>
+											</header>
+											      <iframe  src="assets/pdfs/poster.pdf" width="100%" height="860px"></iframe>
+										</article>
+								</div>
+						</div>
+					</div>
+				</section>
+
+<!-- BibTex citation -->
+<section class="section" id="BibTeX" style="background: #F2F2F2; padding: 2em 0 2em 0">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre>
+
+		  @ARTICLE{,
+				  author={},
+				  journal={},
+				  title={},
+				  year={},
+				  volume={},
+				  number={},
+				  pages={},
+				  doi={}
+		  }
+
+	  </pre>
+    </div>
+</section>
+
+			<!-- Footer -->
+				<section id="footer">
+					<div class="container">
+						<div class="columns is-centered">
+						  <div class="column is-8">
+							<div class="content">
+
+							  <p align="center">
+								This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+								Commons Attribution-ShareAlike 4.0 International License</a>. You are free to use the <a href="https://github.com/HakamShams/HakamShams.github.io">source code</a> of this website, we only ask you to give appropriate credits and to consider the licences of the source codes.
+							  </p>
+								<h3 align="center" style="color: white; font-size:22px"> Contact: <a href="mailto:shams@iai.uni-bonn.de">shams@iai.uni-bonn.de</a>
+									<!--&emsp;&emsp;
+												 <a style="color: white" href="mailto:gall@iai.uni-bonn.de">gall@iai.uni-bonn.de</a> -->
+								</h3>
+
+							</div>
+						  </div>
+						</div>
+					  </div>
+
+					<div id="copyright" class="container">
+
+						<ul class="links">
+
+							<li>&copy; Untitled. All rights reserved</li>
+							<li>Design: <a  href="http://html5up.net">HTML5 UP</a> &
+								<a href="https://nerfies.github.io">Nerfie</a>
+							</li>
+						<!--	<li>Contact: <a style="color: white" href="mailto:shams@iai.uni-bonn.de">shams@iai.uni-bonn.de</a> or
+							 <a style="color: white" href="mailto:gall@iai.uni-bonn.de">gall@iai.uni-bonn.de</a></li> -->
+						</ul>
+					</div>
+
+				</section>
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		  	<script src="./assets/js/bulma-carousel.min.js"></script>
+	  		<script src="./assets/js/bulma-slider.min.js"></script>
+	  		<script src="./assets/js/index.js"></script>-->
+
+	</body>
+</html>
+
