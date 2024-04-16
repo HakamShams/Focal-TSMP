@@ -7,15 +7,16 @@ If you find our work useful in your research, please cite:
 
 ```
 
-@Article{egusphere-2023-2422,
+@Article{gmd-17-2987-2024,
 AUTHOR = {Shams Eddin, M. H. and Gall, J.},
-TITLE = {Focal-TSMP: Deep learning for vegetation health prediction and agricultural drought assessment from a regional climate simulation},
-JOURNAL = {EGUsphere},
-VOLUME = {2023},
-YEAR = {2023},
-PAGES = {1--50},
-URL = {https://egusphere.copernicus.org/preprints/2023/egusphere-2023-2422/},
-DOI = {10.5194/egusphere-2023-2422}
+TITLE = {Focal-TSMP: deep learning for vegetation health prediction and agricultural drought assessment from a regional climate simulation},
+JOURNAL = {Geoscientific Model Development},
+VOLUME = {17},
+YEAR = {2024},
+NUMBER = {7},
+PAGES = {2987--3023},
+URL = {https://gmd.copernicus.org/articles/17/2987/2024/},
+DOI = {10.5194/gmd-17-2987-2024}
 }
 
 ```
